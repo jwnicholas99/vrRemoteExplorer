@@ -50,7 +50,11 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/TouchPad",
+      "name": "/actions/default/in/TouchPadPlayer",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/TouchPadRobot",
       "type": "vector2"
     },
     {
@@ -174,7 +178,8 @@
       "/actions/platformer/in/Jump": "Jump",
       "/actions/default/in/SnapTurnLeft": "Snap Turn (Left)",
       "/actions/default/in/SnapTurnRight": "Snap Turn (Right)",
-      "/actions/default/in/TouchPad": "TouchPad"
+      "/actions/default/in/TouchPadPlayer": "TouchPadPlayer",
+      "/actions/default/in/TouchPadRobot": "TouchPadRobot"
     }
   ]
 }
