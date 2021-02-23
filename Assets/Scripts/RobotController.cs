@@ -8,7 +8,7 @@ using Valve.VR.InteractionSystem;
 namespace RosSharp.RosBridgeClient {
     public class RobotController : UnityPublisher<MessageTypes.Sensor.Joy> { 
         public SteamVR_Action_Vector2 input;
-        public SteamVR_Action_Boolean GrabPinch;
+        public SteamVR_Action_Boolean IsRotRobot;
         public float speed = 1;
 
         public string FrameId = "Unity";
@@ -35,7 +35,7 @@ namespace RosSharp.RosBridgeClient {
             message.header.Update();
             message.axes[0] = input.axis.x;
             message.axes[1] = input.axis.y;
-            message.buttons[0] = Convert.ToInt32(GrabPinch.state);
+            message.buttons[0] = Convert.ToInt32(IsRotRobot.state);
 
             Publish(message);
         }

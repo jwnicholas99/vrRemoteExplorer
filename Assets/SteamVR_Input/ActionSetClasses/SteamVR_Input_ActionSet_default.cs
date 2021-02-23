@@ -121,6 +121,22 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean IsRotPlayer
+        {
+            get
+            {
+                return SteamVR_Actions.default_IsRotPlayer;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean IsRotRobot
+        {
+            get
+            {
+                return SteamVR_Actions.default_IsRotRobot;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

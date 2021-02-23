@@ -1835,7 +1835,11 @@ MonoBehaviour:
   input:
     actionPath: /actions/default/in/TouchPadPlayer
     needsReinit: 0
-  speed: 1
+  IsRotPlayer:
+    actionPath: /actions/default/in/IsRotPlayer
+    needsReinit: 0
+  TransSpeed: 1
+  RotSpeed: 2
 --- !u!114 &387905857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6144,8 +6148,8 @@ MonoBehaviour:
   input:
     actionPath: /actions/default/in/TouchPadRobot
     needsReinit: 0
-  GrabPinch:
-    actionPath: /actions/default/in/GrabPinch
+  IsRotRobot:
+    actionPath: /actions/default/in/IsRotRobot
     needsReinit: 0
   speed: 1
   FrameId: Unity

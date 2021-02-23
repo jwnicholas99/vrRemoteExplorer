@@ -43,6 +43,10 @@ namespace Valve.VR
         
         private static SteamVR_Action_Vector2 p_default_TouchPadRobot;
         
+        private static SteamVR_Action_Boolean p_default_IsRotPlayer;
+        
+        private static SteamVR_Action_Boolean p_default_IsRotRobot;
+        
         private static SteamVR_Action_Vibration p_default_Haptic;
         
         private static SteamVR_Action_Vector2 p_platformer_Move;
@@ -163,6 +167,22 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean default_IsRotPlayer
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_IsRotPlayer.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean default_IsRotRobot
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_IsRotRobot.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         public static SteamVR_Action_Vibration default_Haptic
         {
             get
@@ -243,6 +263,8 @@ namespace Valve.VR
                     SteamVR_Actions.default_SnapTurnRight,
                     SteamVR_Actions.default_TouchPadPlayer,
                     SteamVR_Actions.default_TouchPadRobot,
+                    SteamVR_Actions.default_IsRotPlayer,
+                    SteamVR_Actions.default_IsRotRobot,
                     SteamVR_Actions.default_Haptic,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
@@ -265,6 +287,8 @@ namespace Valve.VR
                     SteamVR_Actions.default_SnapTurnRight,
                     SteamVR_Actions.default_TouchPadPlayer,
                     SteamVR_Actions.default_TouchPadRobot,
+                    SteamVR_Actions.default_IsRotPlayer,
+                    SteamVR_Actions.default_IsRotRobot,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
@@ -287,6 +311,8 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
+                    SteamVR_Actions.default_IsRotPlayer,
+                    SteamVR_Actions.default_IsRotRobot,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset};
@@ -313,6 +339,8 @@ namespace Valve.VR
                     SteamVR_Actions.default_SnapTurnRight,
                     SteamVR_Actions.default_TouchPadPlayer,
                     SteamVR_Actions.default_TouchPadRobot,
+                    SteamVR_Actions.default_IsRotPlayer,
+                    SteamVR_Actions.default_IsRotRobot,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
@@ -336,6 +364,8 @@ namespace Valve.VR
             SteamVR_Actions.p_default_SnapTurnRight = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SnapTurnRight")));
             SteamVR_Actions.p_default_TouchPadPlayer = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/default/in/TouchPadPlayer")));
             SteamVR_Actions.p_default_TouchPadRobot = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/default/in/TouchPadRobot")));
+            SteamVR_Actions.p_default_IsRotPlayer = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/IsRotPlayer")));
+            SteamVR_Actions.p_default_IsRotRobot = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/IsRotRobot")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
             SteamVR_Actions.p_platformer_Move = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/platformer/in/Move")));
             SteamVR_Actions.p_platformer_Jump = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/platformer/in/Jump")));
