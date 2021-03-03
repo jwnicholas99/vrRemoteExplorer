@@ -5,9 +5,12 @@ using UnityEngine;
 namespace RosSharp.RosBridgeClient {
     public class TFSubscriber : UnitySubscriber<MessageTypes.Tf2.TFMessage> {
         public Transform PublishedTransform;
+        public string baseName;
 
         private Vector3 position;
         private Quaternion rotation;
+        private Vector3 posCorrection;
+        private Quaternion rotCorrection;
         private bool isMessageReceived;
 
         protected override void Start() {
@@ -20,11 +23,13 @@ namespace RosSharp.RosBridgeClient {
         }
 
         protected override void ReceiveMessage(MessageTypes.Tf2.TFMessage message) {
-            if (message.transforms[0].child_frame_id == "base_link") {
-                position = GetPosition(message).Ros2Unity();
-                rotation = GetRotation(message).Ros2Unity();
+            if (message.transforms[0].child_frame_id == baseName) {
+                position = GetPosition(message).Ros2Unity() + posCorrection;
+                rotation = GetRotation(message).Ros2Unity() * rotCorrection;
+            } else if (message.transforms[0].child_frame_id == "odom") {
+                posCorrection = GetPosition(message).Ros2Unity();
+                rotCorrection = GetRotation(message).Ros2Unity();
             }
-            
             isMessageReceived = true;
         }
         private void ProcessMessage() {
