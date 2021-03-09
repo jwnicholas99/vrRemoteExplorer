@@ -5,66 +5,46 @@ using System.IO;
 using RosSharp.RosBridgeClient;
 using Unity;
 
-public class GridMapRenderer : MonoBehaviour
-{
+public class GridMapRenderer : MonoBehaviour {
     public GridMapSubscriber subscriber;
 
-    // Mesh stores the positions and colours of every point in the cloud
-    // The renderer and filter are used to display it
     Mesh mesh;
     MeshRenderer meshRenderer;
     MeshFilter mf;
+
     public Material Material;
+    private Texture2D texture;
 
-    // The size, positions and colours of each of the pointcloud
-    public float pointSize = 1f;
+    void Start() {
+        texture = new Texture2D(0, 0);
 
-    private Vector3[] positions = new Vector3[] { new Vector3(0, 0, 0), new Vector3(0, 1, 0) };
-    private Color[] colours = new Color[] { new Color(1f, 0f, 0f), new Color(0f, 1f, 0f) };
-
-    public Transform offset; // Put any gameobject that faciliatates adjusting the origin of the pointcloud in VR. 
-
-    void Start()
-    {
-        // Give all the required components to the gameObject
         meshRenderer = gameObject.AddComponent<MeshRenderer>();
+        meshRenderer.material = Material;
         mf = gameObject.AddComponent<MeshFilter>();
-        //meshRenderer.material = Material;
-        meshRenderer.material = new Material(Shader.Find("Custom/PointCloudShader"));
-        mesh = new Mesh {
-            // This uses 32 bit integers instead of 16-bit (which would limit the mesh to only 65536 vertices)
-            indexFormat = UnityEngine.Rendering.IndexFormat.UInt32
-        };
-
-        transform.position = offset.position;
-        transform.rotation = offset.rotation;
+        mesh = new Mesh();
     }
 
-    void UpdateMesh() {
-
-        positions = subscriber.GetGrid();
-        colours = subscriber.GetGridColor();
-        if (positions == null) {
+    void UpdateTexture() {
+        texture = subscriber.GetTexture();
+        if (texture == null) {
             return;
         }
+
         mesh.Clear();
-        mesh.vertices = positions;
-        mesh.colors = colours;
-        int[] indices = new int[positions.Length];
 
-        for (int i = 0; i < positions.Length; i++) {
-            indices[i] = i;
-        }
+        mesh.vertices = subscriber.GetVertices();
+        mesh.triangles = subscriber.GetTriangles();
+        mesh.uv = subscriber.GetUV();
 
-        mesh.SetIndices(indices, MeshTopology.Points, 0);
+        meshRenderer.material.mainTexture = texture;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
         mf.mesh = mesh;
-
     }
 
     void Update() {
-        transform.position = subscriber.GetPosition();
+        transform.position = subscriber.GetPosition() + new Vector3(0, 0.01f, 0);
         transform.rotation = subscriber.GetRotation();
-        //meshRenderer.material.SetFloat("_PointSize", pointSize);
-        UpdateMesh();
+        UpdateTexture();
     }
 }

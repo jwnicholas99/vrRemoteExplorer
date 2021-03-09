@@ -15,9 +15,11 @@ namespace RosSharp.RosBridgeClient {
         bool readyToProcessMessage = true;
         private int size;
 
-        private Vector3[] grid;
-        private Color[] grid_color;
-        private int[] meshTriangles;
+        private Texture2D texture;
+        private Color[] texture_colors;
+        private Vector3[] vertices;
+        private int[] triangles;
+        private Vector2[] uv;
 
         int width;
         int height;
@@ -30,12 +32,12 @@ namespace RosSharp.RosBridgeClient {
         }
 
         public void Update() {
-            
+
             if (isMessageReceived) {
                 GridMapRendering();
                 isMessageReceived = false;
             }
-            
+
         }
 
         protected override void ReceiveMessage(MessageTypes.Nav.OccupancyGrid message) {
@@ -46,9 +48,8 @@ namespace RosSharp.RosBridgeClient {
                 (float)message.info.origin.position.y,
                 (float)message.info.origin.position.z
             );
-
             position = position.Ros2Unity();
-            
+
             rotation = new Quaternion(
                 (float)message.info.origin.orientation.x,
                 (float)message.info.origin.orientation.y,
@@ -68,24 +69,17 @@ namespace RosSharp.RosBridgeClient {
         }
 
         void GridMapRendering() {
-            grid = new Vector3[size];
-            grid_color = new Color[size];
-            meshTriangles = new int[3 * size];
+            texture = new Texture2D(width, height);
+            texture_colors = new Color[size];
 
-            int cell_num; 
-            float x;
-            float y;
-            float z;
+            int cell_num;
             sbyte probability;
             Color color;
-     
+
+            // Determine colors of texture
             for (int row_num = 0; row_num < height; row_num++) {
                 for (int col_num = 0; col_num < width; col_num++) {
                     cell_num = row_num * width + col_num;
-                    x = col_num * resolution;
-                    y = row_num * resolution;
-                    z = 0;
-                    grid[cell_num] = new Vector3(x, y, z).Ros2Unity();
 
                     probability = gridArray[cell_num];
                     if (probability == 0) {
@@ -95,25 +89,48 @@ namespace RosSharp.RosBridgeClient {
                     } else {
                         color = new Color(.5f, .5f, .5f);
                     }
-                    grid_color[cell_num] = color;
-                    
- 
+                    texture_colors[cell_num] = color;
                 }
             }
 
-            for (int i = 0; i < meshTriangles.Length / 3; i++) {
-                meshTriangles[3 * i] = 0;
-                meshTriangles[3 * i + 1] = i + 2;
-                meshTriangles[3 * i + 2] = i + 1;
-            }
+            texture.SetPixels(texture_colors);
+            texture.Apply();
+
+            // Vertices for the 4 corners of the mesh
+            vertices = new Vector3[4] {
+                new Vector3(0, 0, 0),
+                new Vector3(texture.width * resolution, 0, 0).Ros2Unity(),
+                new Vector3(0, texture.height * resolution, 0).Ros2Unity(),
+                new Vector3(texture.width * resolution, texture.height * resolution, 0).Ros2Unity()
+            };
+
+            triangles = new int[6] {
+                0, 2, 1, // lower left triangle
+                2, 3, 1  // upper right triangle
+            };
+
+            uv = new Vector2[4] {
+                new Vector2(0, 0),
+                new Vector2(1, 0),
+                new Vector2(0, 1),
+                new Vector2(1, 1)
+            };
         }
 
-        public Vector3[] GetGrid() {
-            return grid;
+        public Texture2D GetTexture() {
+            return texture;
         }
 
-        public Color[] GetGridColor() {
-            return grid_color;
+        public Vector3[] GetVertices() {
+            return vertices;
+        }
+
+        public int[] GetTriangles() {
+            return triangles;
+        }
+
+        public Vector2[] GetUV() {
+            return uv;
         }
 
         public Vector3 GetPosition() {
@@ -122,10 +139,6 @@ namespace RosSharp.RosBridgeClient {
 
         public Quaternion GetRotation() {
             return rotation;
-        }
-
-        public int[] GetTriangles() {
-            return meshTriangles;
         }
     }
 }

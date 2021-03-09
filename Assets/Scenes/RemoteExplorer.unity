@@ -5963,13 +5963,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1740030127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf204710acef1f4ab856aa68774b537, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aec2198d5d964540806ca9761f1bd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   subscriber: {fileID: 1895253227}
-  Material: {fileID: 2100000, guid: 753a9b80e714a8a43a0c1ff5a89d0bc9, type: 2}
-  pointSize: 1
-  offset: {fileID: 1018723498}
+  Material: {fileID: 2100000, guid: 9827e7e4080e8184eaac6a80b94633aa, type: 2}
 --- !u!4 &1740030129
 Transform:
   m_ObjectHideFlags: 0
@@ -6537,7 +6535,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1895253215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b36f3b44b40644980bcc93279e2ccd, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fd74d3356d4a6e41ac6fa217c3ec807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /rtabmap/grid_map
