@@ -29,6 +29,7 @@ namespace RosSharp.RosBridgeClient {
 
         protected override void Start() {
             base.Start();
+            texture = new Texture2D(width, height);
         }
 
         public void Update() {
@@ -38,11 +39,14 @@ namespace RosSharp.RosBridgeClient {
                 isMessageReceived = false;
             }
 
+            //MapOrigin.transform.position = position;
+            //MapOrigin.transform.rotation = rotation;
         }
 
         protected override void ReceiveMessage(MessageTypes.Nav.OccupancyGrid message) {
             width = (int)message.info.width;
             height = (int)message.info.height;
+
             position = new Vector3(
                 (float)message.info.origin.position.x,
                 (float)message.info.origin.position.y,
@@ -57,6 +61,8 @@ namespace RosSharp.RosBridgeClient {
                 (float)message.info.origin.orientation.w
             );
             rotation = rotation.Ros2Unity();
+
+            
 
             size = width * height;
             resolution = message.info.resolution;

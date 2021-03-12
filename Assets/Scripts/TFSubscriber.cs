@@ -12,6 +12,7 @@ namespace RosSharp.RosBridgeClient {
         private Vector3 posCorrection;
         private Quaternion rotCorrection;
         private bool isMessageReceived;
+        private bool isInitialPositionSet;
 
         protected override void Start() {
             base.Start();
