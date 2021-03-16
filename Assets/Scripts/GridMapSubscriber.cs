@@ -28,19 +28,17 @@ namespace RosSharp.RosBridgeClient {
         float resolution;
 
         protected override void Start() {
+            TimeStep = 5;
             base.Start();
             texture = new Texture2D(width, height);
         }
 
         public void Update() {
-
+            
             if (isMessageReceived) {
                 GridMapRendering();
                 isMessageReceived = false;
             }
-
-            //MapOrigin.transform.position = position;
-            //MapOrigin.transform.rotation = rotation;
         }
 
         protected override void ReceiveMessage(MessageTypes.Nav.OccupancyGrid message) {
@@ -62,8 +60,6 @@ namespace RosSharp.RosBridgeClient {
             );
             rotation = rotation.Ros2Unity();
 
-            
-
             size = width * height;
             resolution = message.info.resolution;
 
@@ -83,6 +79,7 @@ namespace RosSharp.RosBridgeClient {
             Color color;
 
             // Determine colors of texture
+            
             for (int row_num = 0; row_num < height; row_num++) {
                 for (int col_num = 0; col_num < width; col_num++) {
                     cell_num = row_num * width + col_num;
@@ -101,7 +98,7 @@ namespace RosSharp.RosBridgeClient {
 
             texture.SetPixels(texture_colors);
             texture.Apply();
-
+            
             // Vertices for the 4 corners of the mesh
             vertices = new Vector3[4] {
                 new Vector3(0, 0, 0),
