@@ -18,6 +18,8 @@ namespace RosSharp.RosBridgeClient {
 
         private Vector3[] pcl;
         private Color[] pcl_color;
+        private Vector3[] next_pcl;
+        private Color[] next_pcl_color;
 
         int width;
         int height;
@@ -26,7 +28,6 @@ namespace RosSharp.RosBridgeClient {
 
         protected override void Start() {
             base.Start();
-
         }
 
         public void Update() {
@@ -35,8 +36,6 @@ namespace RosSharp.RosBridgeClient {
                 RgbdRendering();
                 isMessageReceived = false;
             }
-
-
         }
 
         protected override void ReceiveMessage(PointCloud2 message) {
@@ -44,7 +43,6 @@ namespace RosSharp.RosBridgeClient {
 
             byteArray = new byte[size];
             byteArray = message.data;
-
 
             width = (int)message.width;
             height = (int)message.height;
@@ -97,7 +95,6 @@ namespace RosSharp.RosBridgeClient {
                 // For some reason, this does not require Ros2Unity() conversion
                 pcl[n] = new Vector3(x, y, z).Ros2Unity();
                 pcl_color[n] = new Color(r, g, b);
-
 
             }
         }

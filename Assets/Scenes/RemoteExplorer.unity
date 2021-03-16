@@ -1836,7 +1836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &276155433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6056,7 +6056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aec2198d5d964540806ca9761f1bd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscriber: {fileID: 1895253227}
+  subscriber: {fileID: 0}
   Material: {fileID: 2100000, guid: 9827e7e4080e8184eaac6a80b94633aa, type: 2}
 --- !u!4 &1740030129
 Transform:
@@ -6438,10 +6438,9 @@ GameObject:
   - component: {fileID: 1895253217}
   - component: {fileID: 1895253216}
   - component: {fileID: 1895253225}
-  - component: {fileID: 1895253227}
   - component: {fileID: 1895253228}
-  - component: {fileID: 1895253226}
   - component: {fileID: 1895253229}
+  - component: {fileID: 1895253226}
   m_Layer: 0
   m_Name: RosConnector
   m_TagString: Untagged
@@ -6611,28 +6610,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895253215}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b36f3b44b40644980bcc93279e2ccd, type: 3}
+  m_Script: {fileID: 11500000, guid: d4e11ce4600f0ab4f9954205ceac622a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /rtabmap/cloud_map
+  Topic: /pointcloud_diff
   TimeStep: 0
   MapOrigin: {fileID: 1018723497}
---- !u!114 &1895253227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895253215}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd74d3356d4a6e41ac6fa217c3ec807, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /grid_info
-  TimeStep: 0
 --- !u!114 &1895253228
 MonoBehaviour:
   m_ObjectHideFlags: 0

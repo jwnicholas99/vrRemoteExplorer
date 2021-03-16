@@ -5,7 +5,7 @@ using System.IO;
 using RosSharp.RosBridgeClient;
 
 public class CloudMapRenderer : MonoBehaviour {
-    public CloudMapSubscriber subscriber;
+    public CloudMapDiffSubscriber subscriber;
 
     // Mesh stores the positions and colours of every point in the cloud
     // The renderer and filter are used to display it
