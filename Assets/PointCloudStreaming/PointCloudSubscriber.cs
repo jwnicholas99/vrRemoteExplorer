@@ -14,7 +14,6 @@ namespace RosSharp.RosBridgeClient
     {
         private byte[] byteArray;
         private bool isMessageReceived = false;
-        bool readyToProcessMessage = true;
         private int size;
 
         private Vector3[] pcl;
