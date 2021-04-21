@@ -86,7 +86,7 @@ public class RGBDRenderer : MonoBehaviour {
 
     void UpdateMesh() {
         //quad.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", rgbSubscriber.GetTexture());
-        //quad.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", depthSubscriber.GetTexture());
+        quad.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", depthSubscriber.GetTexture());
 
         rgbHeader = rgbSubscriber.GetHeader();
         depthHeader = depthSubscriber.GetHeader();
